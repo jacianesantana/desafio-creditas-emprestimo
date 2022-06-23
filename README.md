@@ -2,15 +2,15 @@
 
 ## Desafio de Código
 
-A proposta da aplicação que vamos desenvolver em conjunto é disponibilizar a uma pessoa as modalidades de empréstimo as quais ela tem acesso de acordo com algumas variáveis.
+Desenvolver uma aplicação para disponibilizar a uma pessoa as modalidades de empréstimo as quais ela tem acesso de acordo com algumas variáveis.
 
-Devemos prover os seguintes modelos de empréstimo:
+Modelos de empréstimo:
 
 - Empréstimo pessoal. Taxa de juros: 4%
 - Empréstimo com garantia. Taxa de juros: 3%
 - Consignado. Taxa de juros: 2%
 
-Abaixo seguem as regras de negócio relacionadas a concessão de empréstimo de acordo com o perfil da pessoa:
+Regras de negócio relacionadas a concessão de empréstimo de acordo com o perfil da pessoa:
 
 |                          | Empréstimo pessoal | Empréstimo c/ garantia | Consignado |
 | ------------------------ | ------------------ | :--------------------: | ---------- |
@@ -22,8 +22,39 @@ Abaixo seguem as regras de negócio relacionadas a concessão de empréstimo de 
 - \*\* Clientes que residem em SP
 - \*\*\* Clientes com menos de 30 anos que residem em SP
 
+### A aplicação deve receber como entrada e responder as seguintes informações:
+
+#### input
+
+```json
+{
+  "customer": {
+    "name": "Erikaya",
+    "cpf": "123.456.789-10",
+    "age": 29,
+    "location": "BH",
+    "income": 3000
+  }
+}
+```
+
+##### output
+
+```json
+{
+  "customer": "Erikaya",
+  "loans": [
+    {
+      "type": "personal",
+      "taxes": 1
+    }
+  ]
+}
+```
+
 ## Stack
 
 - Java 11
 - Spring Boot
-- Spring Data JPA
+- Lombok
+- Junit
