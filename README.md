@@ -1,4 +1,4 @@
-# Loan (empréstimo)
+# Loan
 Disponibiliza à uma pessoa as modalidades de empréstimo as quais ela tem acesso de acordo com algumas variáveis.
 
 ## Desafio de Código da empresa Creditas
