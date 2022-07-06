@@ -1,7 +1,7 @@
-# Desafio de Empréstimo Creditas
+# Loan (empréstimo)
 Disponibiliza à uma pessoa as modalidades de empréstimo as quais ela tem acesso de acordo com algumas variáveis.
 
-## Desafio de Código
+## Desafio de Código da empresa Creditas
 
 Desenvolver uma aplicação para disponibilizar a uma pessoa as modalidades de empréstimo as quais ela tem acesso de acordo com algumas variáveis.
 
