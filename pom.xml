@@ -11,8 +11,8 @@
 	<groupId>loan</groupId>
 	<artifactId>api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>creditas-emprestimo</name>
-	<description>Desafio de empréstimos da Creditas</description>
+	<name>loan-api</name>
+	<description>Disponibilizar a uma pessoa as modalidades de emprestimos as quais ela tem acesso</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
