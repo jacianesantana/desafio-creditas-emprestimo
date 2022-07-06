@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("loans")
 @RequiredArgsConstructor
@@ -19,8 +21,8 @@ public class LoanController {
     private final LoanService loanService;
 
     @PostMapping
-    public ResponseEntity<LoanResponse> eligibility(@RequestBody LoanRequest loanRequest) {
-        return new ResponseEntity<>(loanService.eligibility(loanRequest.getCustomer()), HttpStatus.CREATED);
+    public ResponseEntity<LoanResponse> eligibility(@Valid @RequestBody LoanRequest loanRequest) {
+        return new ResponseEntity<>(loanService.eligibility(loanRequest.getCustomer()), HttpStatus.OK);
     }
 
 }

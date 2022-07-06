@@ -6,15 +6,11 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
 
 import static loan.api.model.LoanType.*;
-import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.ArgumentMatchers.anyString;
 
 @ExtendWith(SpringExtension.class)
 class LoanServiceTest {
@@ -22,13 +18,8 @@ class LoanServiceTest {
     @InjectMocks
     private LoanService loanService;
 
-    @Mock
-    private ValidationService validationService;
-
     @Test
     void eligibilityShouldReturnOnlyPersonalLoan_WithIncomeLessOrEqual3000() {
-        Mockito.when(validationService.validateCPF(anyString())).thenReturn(true);
-
         var loanRequest = loanBuilder();
         var response = loanService.eligibility(loanRequest.getCustomer());
 
@@ -39,8 +30,6 @@ class LoanServiceTest {
 
     @Test
     void eligibilityShouldReturnPersonalLoanAndLoanWithGuarantee_WithIncomeLessOrEqual3000() {
-        Mockito.when(validationService.validateCPF(anyString())).thenReturn(true);
-
         var loanRequest = loanBuilder();
         loanRequest.getCustomer().setAge(29);
         loanRequest.getCustomer().setLocation("SP");
@@ -54,8 +43,6 @@ class LoanServiceTest {
 
     @Test
     void eligibilityShouldReturnOnlyPersonalLoan_WithIncomeLessThan5000() {
-        Mockito.when(validationService.validateCPF(anyString())).thenReturn(true);
-
         var loanRequest = loanBuilder();
         loanRequest.getCustomer().setIncome(BigDecimal.valueOf(4000));
 
@@ -68,8 +55,6 @@ class LoanServiceTest {
 
     @Test
     void eligibilityShouldReturnPersonalLoanAndLoanWithGuarantee_WithIncomeLessThan5000() {
-        Mockito.when(validationService.validateCPF(anyString())).thenReturn(true);
-
         var loanRequest = loanBuilder();
         loanRequest.getCustomer().setIncome(BigDecimal.valueOf(4000));
         loanRequest.getCustomer().setLocation("SP");
@@ -83,8 +68,6 @@ class LoanServiceTest {
 
     @Test
     void eligibilityShouldReturnOnlyPersonalLoan_WithIncomeBiggerOrEqual5000() {
-        Mockito.when(validationService.validateCPF(anyString())).thenReturn(true);
-
         var loanRequest = loanBuilder();
         loanRequest.getCustomer().setIncome(BigDecimal.valueOf(5000));
 
@@ -99,8 +82,6 @@ class LoanServiceTest {
 
     @Test
     void eligibilityShouldReturnPersonalLoanAndLoanWithGuarantee_WithIncomeBiggerOrEqual5000() {
-        Mockito.when(validationService.validateCPF(anyString())).thenReturn(true);
-
         var loanRequest = loanBuilder();
         loanRequest.getCustomer().setIncome(BigDecimal.valueOf(5000));
         loanRequest.getCustomer().setAge(29);

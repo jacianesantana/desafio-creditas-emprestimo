@@ -21,12 +21,11 @@ public class LoanService {
     private static final Integer AGE = 30;
     private static final String LOCATION = "SP";
 
-    private final ValidationService validationService;
 
     public LoanResponse eligibility(Customer customer) {
         var loans = new ArrayList<Loan>();
 
-        isEligibleForPersonal(customer.getCpf(), loans);
+        isEligibleForPersonal(customer, loans);
         isEligibleForWithGuarantee(customer, loans);
         isEligibleForConsigned(customer, loans);
 
@@ -36,36 +35,30 @@ public class LoanService {
                 .build();
     }
 
-    public void isEligibleForPersonal(String cpf, List<Loan> loans) {
-        if (validationService.validateCPF(cpf)) {
-           loans.add(Loan.builder().type(PERSONAL).taxes(PERSONAL.getTaxes()).build());
+    private void isEligibleForPersonal(Customer customer, List<Loan> loans) {
+       loans.add(Loan.builder().type(PERSONAL).taxes(PERSONAL.getTaxes()).build());
+    }
+
+    private void isEligibleForWithGuarantee(Customer customer, List<Loan> loans) {
+        if (customer.getIncome().compareTo(MIN_VALUE) <= 0
+                && customer.getAge() < AGE
+                && customer.getLocation().equals(LOCATION)) {
+            loans.add(Loan.builder().type(WITH_GUARANTEE).taxes(WITH_GUARANTEE.getTaxes()).build());
+        }
+        if (customer.getIncome().compareTo(MIN_VALUE) > 0
+                && customer.getIncome().compareTo(MAX_VALUE) < 0
+                && customer.getLocation().equals(LOCATION)) {
+            loans.add(Loan.builder().type(WITH_GUARANTEE).taxes(WITH_GUARANTEE.getTaxes()).build());
+        }
+        if (customer.getIncome().compareTo(MAX_VALUE) >= 0
+                && customer.getAge() < AGE) {
+            loans.add(Loan.builder().type(WITH_GUARANTEE).taxes(WITH_GUARANTEE.getTaxes()).build());
         }
     }
 
-    public void isEligibleForWithGuarantee(Customer customer, List<Loan> loans) {
-        if (validationService.validateCPF(customer.getCpf())) {
-            if (customer.getIncome().compareTo(MIN_VALUE) <= 0
-                    && customer.getAge() < AGE
-                    && customer.getLocation().equals(LOCATION)) {
-                loans.add(Loan.builder().type(WITH_GUARANTEE).taxes(WITH_GUARANTEE.getTaxes()).build());
-            }
-            if (customer.getIncome().compareTo(MIN_VALUE) > 0
-                    && customer.getIncome().compareTo(MAX_VALUE) < 0
-                    && customer.getLocation().equals(LOCATION)) {
-                loans.add(Loan.builder().type(WITH_GUARANTEE).taxes(WITH_GUARANTEE.getTaxes()).build());
-            }
-            if (customer.getIncome().compareTo(MAX_VALUE) >= 0
-                    && customer.getAge() < AGE) {
-                loans.add(Loan.builder().type(WITH_GUARANTEE).taxes(WITH_GUARANTEE.getTaxes()).build());
-            }
-        }
-    }
-
-    public void isEligibleForConsigned(Customer customer, List<Loan> loans) {
-        if (validationService.validateCPF(customer.getCpf())) {
-            if (customer.getIncome().compareTo(MAX_VALUE) >= 0) {
-                loans.add(Loan.builder().type(CONSIGNED).taxes(CONSIGNED.getTaxes()).build());
-            }
+    private void isEligibleForConsigned(Customer customer, List<Loan> loans) {
+        if (customer.getIncome().compareTo(MAX_VALUE) >= 0) {
+            loans.add(Loan.builder().type(CONSIGNED).taxes(CONSIGNED.getTaxes()).build());
         }
     }
 
