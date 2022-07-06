@@ -1,6 +1,6 @@
-package desafio.creditasemprestimo.controller.response;
+package loan.api.controller.response;
 
-import desafio.creditasemprestimo.model.Loan;
+import loan.api.model.Loan;
 import lombok.Builder;
 import lombok.Data;
 

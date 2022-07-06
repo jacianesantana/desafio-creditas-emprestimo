@@ -1,8 +1,8 @@
-package desafio.creditasemprestimo.controller;
+package loan.api.controller;
 
-import desafio.creditasemprestimo.controller.request.LoanRequest;
-import desafio.creditasemprestimo.controller.response.LoanResponse;
-import desafio.creditasemprestimo.service.LoanService;
+import loan.api.controller.request.LoanRequest;
+import loan.api.controller.response.LoanResponse;
+import loan.api.service.LoanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class LoanController {
 
     @PostMapping
     public ResponseEntity<LoanResponse> eligibility(@RequestBody LoanRequest loanRequest) {
-        return new ResponseEntity<>(loanService.eligibility(loanRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(loanService.eligibility(loanRequest.getCustomer()), HttpStatus.CREATED);
     }
 
 }

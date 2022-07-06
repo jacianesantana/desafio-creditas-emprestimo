@@ -8,8 +8,8 @@
 		<version>2.7.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>desafio</groupId>
-	<artifactId>creditas-emprestimo</artifactId>
+	<groupId>loan</groupId>
+	<artifactId>api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>creditas-emprestimo</name>
 	<description>Desafio de empréstimos da Creditas</description>

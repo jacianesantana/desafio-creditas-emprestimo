@@ -1,4 +1,4 @@
-package desafio.creditasemprestimo.model;
+package loan.api.model;
 
 import lombok.Data;
 import java.math.BigDecimal;
