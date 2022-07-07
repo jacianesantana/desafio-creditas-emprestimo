@@ -25,7 +25,7 @@ public class LoanService {
     public LoanResponse eligibility(Customer customer) {
         var loans = new ArrayList<Loan>();
 
-        isEligibleForPersonal(customer, loans);
+        isEligibleForPersonal(loans);
         isEligibleForWithGuarantee(customer, loans);
         isEligibleForConsigned(customer, loans);
 
@@ -35,7 +35,7 @@ public class LoanService {
                 .build();
     }
 
-    private void isEligibleForPersonal(Customer customer, List<Loan> loans) {
+    private void isEligibleForPersonal(List<Loan> loans) {
        loans.add(Loan.builder().type(PERSONAL).taxes(PERSONAL.getTaxes()).build());
     }
 
